@@ -1,4 +1,12 @@
+image: node:latest
 
-include:
-    project: 'frontend'
-    file: '.gitlab-ci.yml'
+stages:
+    - frontend-test
+
+frontend-test:
+    stage: frontend-test
+    script:
+        - cd frontend
+        - yarn
+        - yarn test
+
