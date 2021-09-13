@@ -1,1 +1,4 @@
-include: 'frontend/.gitlab-ci.yml'
+
+include:
+    project: 'frontend'
+    file: '.gitlab-ci.yml'
