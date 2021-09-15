@@ -25,8 +25,8 @@ frontend-build:
     stage: build
     before_script:
         - cd frontend
-        - npm install
+        - yarn
     script:
-        - npm run build
+        - yarn run build
     only:
         - /^main$/
