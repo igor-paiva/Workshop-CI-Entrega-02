@@ -1,5 +1,6 @@
 stages:
     - test
+    - build
 
 frontend-test:
     image: node:latest
@@ -18,3 +19,14 @@ backend-test:
         - npm install
     script:
         - npm run unittest
+
+frontend-build:
+    image: node:latest
+    stage: build
+    before_script:
+        - cd frontend
+        - npm install
+    script:
+        - npm run build
+    only:
+        - /^main$/
