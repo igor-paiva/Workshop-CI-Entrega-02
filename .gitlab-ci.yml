@@ -30,3 +30,14 @@ frontend-build:
         - yarn run build
     only:
         - /^main$/
+
+backend-build:
+    image: node:latest
+    stage: build
+    before_script:
+        - cd backend
+        - npm install
+    script:
+        - npm run build
+    only:
+        - /^main$/
