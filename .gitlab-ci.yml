@@ -48,8 +48,8 @@ frontend-deploy:
     stage: deploy
     services:
         - docker:19.03.12-dind
-    variables:
-        DOCKER_HOST: https://index.docker.io/v1/
+    # variables:
+    #     DOCKER_HOST: https://index.docker.io/v1/
     before_script:
         - cd frontend
         - docker info
