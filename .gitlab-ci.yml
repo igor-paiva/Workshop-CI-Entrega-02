@@ -48,9 +48,11 @@ frontend-deploy:
     stage: deploy
     before_script:
         - cd frontend
+        - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
     script:
         - docker build -t $DOCKER_ID/$DOCKER_FRONTEND_REPO .
-        - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
         - docker push $DOCKER_ID/$DOCKER_FRONTEND_REPO
     after_script:
         - docker logout
+    only:
+        - /^main$/
