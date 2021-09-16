@@ -44,8 +44,12 @@ backend-build:
         - /^main$/
 
 frontend-deploy:
-    image: docker:latest
+    image: docker:stable
     stage: deploy
+    services:
+        - docker:18.09.7-dind
+    variables:
+        DOCKER_HOST: tcp://localhost:2375/
     before_script:
         - cd frontend
         - docker info
