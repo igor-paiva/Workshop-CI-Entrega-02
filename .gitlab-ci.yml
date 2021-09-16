@@ -48,8 +48,6 @@ frontend-deploy:
     stage: deploy
     services:
         - docker:19.03.12-dind
-    # variables:
-    #     DOCKER_HOST: https://index.docker.io/v1/
     before_script:
         - cd frontend
         - docker info
@@ -57,6 +55,23 @@ frontend-deploy:
     script:
         - docker build -t $DOCKER_ID/$DOCKER_FRONTEND_REPO .
         - docker push $DOCKER_ID/$DOCKER_FRONTEND_REPO
+    after_script:
+        - docker logout
+    only:
+        - /^main$/
+
+backend-deploy:
+    image: docker:stable
+    stage: deploy
+    services:
+        - docker:19.03.12-dind
+    before_script:
+        - cd backend
+        - docker info
+        - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
+    script:
+        - docker build -t $DOCKER_ID/$DOCKER_BACKEND_REPO .
+        - docker push $DOCKER_ID/$DOCKER_BACKEND_REPO
     after_script:
         - docker logout
     only:
