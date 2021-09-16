@@ -1,6 +1,7 @@
 stages:
     - test
     - build
+    - deploy
 
 frontend-test:
     image: node:latest
@@ -41,3 +42,15 @@ backend-build:
         - npm run build
     only:
         - /^main$/
+
+frontend-deploy:
+    image: docker:latest
+    stage: deploy
+    before_script:
+        - cd frontend
+    script:
+        - docker build -t $DOCKER_ID/$DOCKER_FRONTEND_REPO .
+        - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
+        - docker push $DOCKER_ID/$DOCKER_FRONTEND_REPO
+    after_script:
+        - docker logout
