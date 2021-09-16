@@ -50,7 +50,6 @@ frontend-deploy:
         - docker:19.03.12-dind
     before_script:
         - cd frontend
-        - docker info
         - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
     script:
         - docker build -t $DOCKER_ID/$DOCKER_FRONTEND_REPO .
@@ -67,7 +66,6 @@ backend-deploy:
         - docker:19.03.12-dind
     before_script:
         - cd backend
-        - docker info
         - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
     script:
         - docker build -t $DOCKER_ID/$DOCKER_BACKEND_REPO .
